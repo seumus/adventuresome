@@ -8,8 +8,9 @@ var assert = require('chai').assert;
 describe('AdventureGame', function() {
 
   beforeEach(function(){
-    food1 = new Food("grain", 10);
-    food2 = new Food("pizza", 5000);
+    food1 = new Food("grain", 10,1);
+    food2 = new Food("pizza", 5000,1);
+    food3 = new Food("potion", 0,5)
 
     gooseman = new Hero("Gooseman", 100, food1, ability[1]);
     seumoose = new Hero("Seumoose", 100, food2, ability[0]);
@@ -32,7 +33,7 @@ describe('AdventureGame', function() {
 
   it('should use attack ability', function(){
     gooseman.useAbility(ratman);
-    assert.equal(95,ratman.health)
+    assert.equal(75,ratman.health)
   });
 
   it('should use heal ability', function(){
@@ -50,10 +51,13 @@ describe('AdventureGame', function() {
   it('should have a battle', function(){
     ratman.useAbility(seumoose);
     seumoose.useAbility(seumoose);
-    // ratman.touch(food2);
+    ratman.touch(food2);
     seumoose.eat(food2);
+    gooseman.eat(food3);
+    // console.log(food3.bonus)
+    gooseman.useAbility(ratman);
 
-    assert.equal(7555,seumoose.health)
+    assert.equal(0,seumoose.health)
   });
 
 })

@@ -14,16 +14,33 @@ Hero.prototype = {
   },
 
   eat: function(food) {
+    if(food.bonus > 1) {
+    this.ability.outcome *= food.bonus;
+  }
     if(food.poisoned === false) {
+
       if(food === this.favFood) {
         this.health += ( food.replValue * 1.5 );
         console.log(this.name + " has eaten their favourite food!!\nNow has " + this.health + " health")
-      } else {
-      this.health += food.replValue;
       }
-    } else {
-      this.health -= food.replValue;
+      else {
+        this.health += food.replValue;
+        }
+      }
+      else {
+        this.health -= food.replValue;
+      if(this.health > 0){
+        console.log(this.name + " now has " + this.health + " health")
+
+      }
+      else {
+        if(this.health < 0){
+          this.health = 0;
+        }
+        console.log(this.name + " is dead!")
+      }
     }
+
   },
 
   useAbility: function(target) {
@@ -38,7 +55,9 @@ Hero.prototype = {
       console.log(target.name + " is dead!")
     }
   }
+
 }
+
 
 
 module.exports = Hero;
