@@ -44,16 +44,21 @@ Hero.prototype = {
   },
 
   useAbility: function(target) {
-    target.health += this.ability.outcome
+
     if(target.health > 0){
-      console.log(this.name + " has " + this.ability.pastName + " " + target.name + " with a result of " + this.ability.outcome + " health\n" + target.name + " now has " + target.health + " health")
+      target.health += this.ability.outcome
       if(target.health < 0){
         target.health = 0;
       }
+      console.log(this.name + " has " + this.ability.pastName + " " + target.name + " with a result of " + this.ability.outcome + " health\n" + target.name + " now has " + target.health + " health")
+      if(target.health === 0){
+        console.log(target.name + " is dead!");
+      }
     }
     else {
-      console.log(target.name + " is dead!")
+      console.log(target.name + " is dead!");
     }
+    // this.ability.outcome = 5;
   }
 
 }
